@@ -11,12 +11,12 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/fontawesome.css') }}">
-        <link rel="stylesheet" href="{{ mix('css/icheck-bootstrap.css') }}">
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/fontawesome.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/icheck-bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="hold-transition sidebar-mini">
+        <div class="wrapper">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -27,12 +27,21 @@
             </header>
 
             <!-- Page Content -->
-            <main>
+            <div class="content-wrapper">
                 {{ $slot }}
-            </main>
+            </div>
+
+            <footer class="main-footer">
+                <!-- To the right -->
+                <div class="float-right d-none d-sm-inline">
+                    Anything you want
+                </div>
+                <!-- Default to the left -->
+                <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+            </footer>
         </div>
 
         <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
     </body>
 </html>
