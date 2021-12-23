@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CollaboratorController;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -10,4 +11,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
         'collaborators' => 'user'
     ])->except('show');
     Route::resource('categories', CategoryController::class);
+    Route::resource('products', ProductController::class);
 });
