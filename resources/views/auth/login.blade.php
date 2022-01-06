@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
             <a href="{{route('home')}}"><b>Cardápio</b>Online</a>

@@ -13,12 +13,12 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+        @stack('css')
+
 
     </head>
-    <body class="hold-transition login-page">
-        <div class="font-sans text-gray-900 antialiased">
-            {{ $slot }}
-        </div>
+    <body class="{{$class}}">
+        {{ $slot }}
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}"></script>
