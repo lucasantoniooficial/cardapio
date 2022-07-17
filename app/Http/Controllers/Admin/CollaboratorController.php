@@ -18,7 +18,7 @@ class CollaboratorController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function index()
     {
@@ -31,7 +31,7 @@ class CollaboratorController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function create()
     {
@@ -55,31 +55,17 @@ class CollaboratorController extends Controller
         // User
         $user->roles()->attach(2);
 
-        return back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        dd($id);
+        back();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  User $user
-     * @return \Illuminate\Http\Response
+     *
      */
     public function edit(User $user)
     {
-        //Bind model (DI)
-//        $user = User::findOrfail($id);
-
         return view('admin.collaborator.edit', ['user' => $user]);
     }
 
@@ -88,7 +74,7 @@ class CollaboratorController extends Controller
      *
      * @param  RequestUpdate  $request
      * @param  User $user
-     * @return \Illuminate\Http\Response
+     *
      */
     public function update(RequestUpdate $request, User $user)
     {
@@ -102,7 +88,7 @@ class CollaboratorController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
      */
     public function destroy(User $user)
     {

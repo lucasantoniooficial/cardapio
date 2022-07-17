@@ -7,16 +7,14 @@ use App\Http\Requests\Product\RequestCreate;
 use App\Http\Requests\Product\RequestUpdate;
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use App\Services\UploadImageService;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function index()
     {
@@ -28,7 +26,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function create()
     {
@@ -40,39 +38,28 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     *
      */
-    public function store(RequestCreate $request)
+    public function store(
+        RequestCreate $request,
+        UploadImageService $uploadImageService
+    )
     {
         $data = $request->validated();
 
-//        Category::find($data['category_id'])->products()->create($data);
-        if($request->hasFile('photo')) {
-            $fileName = Str::slug($data['name'],'_').'.'.$data['photo']->extension();
-            $data['photo'] = $request->photo->storeAs('products', $fileName,'public');
-        }
+        $data['photo'] = $uploadImageService->uploadImage($request, 'products');
 
         Product::create($data);
 
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
      */
     public function edit(Product $product)
     {
@@ -85,17 +72,21 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
      */
-    public function update(RequestUpdate $request, Product $product)
+    public function update(
+        RequestUpdate $request,
+        Product $product,
+        UploadImageService $uploadImageService)
     {
         $data = $request->validated();
 
-        if($request->hasFile('photo')) {
-            Storage::disk('public')->delete($product->photo);
+        $uploadImageService->validateImageUploadedAndDelete($product->photo);
 
-            $fileName = Str::slug($data['name'],'_').'.'.$data['photo']->extension();
-            $data['photo'] = $request->photo->storeAs('products', $fileName,'public');
+        $path = $uploadImageService->uploadImage($request, 'products');
+
+        if ($path) {
+            $data['photo'] = $path;
         }
 
         $product->update($data);
@@ -107,12 +98,18 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
      */
-    public function destroy(Product $product)
+    public function destroy(
+        Product $product,
+        UploadImageService $uploadImageService
+    )
     {
+        $uploadImageService->validateImageUploadedAndDelete($product->photo);
+
         $product->delete();
 
         return back();
     }
+
 }

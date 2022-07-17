@@ -1,7 +1,7 @@
 <x-guest-layout class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{route('home')}}"><b>Cardápio</b>Online</a>
+            <a href="{{route('menu.home')}}"><b>Cardápio</b>Online</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">

@@ -1,8 +1,11 @@
 .header {
     padding: 17px 90px;
-    gap: 12px;
     background: rgba(113, 113, 236, 0.53);
     color: #fff;
+}
+
+.header-container {
+    gap: 12px;
 }
 
 .header .header_type .contact {

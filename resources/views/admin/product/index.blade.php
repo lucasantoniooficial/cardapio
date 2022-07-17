@@ -13,6 +13,7 @@
                     <tr>
                         <th>Código</th>
                         <th>Nome</th>
+                        <th>Categoria</th>
                         <th>Preço</th>
                         <th>Ações</th>
                     </tr>
@@ -22,7 +23,8 @@
                         <tr>
                             <td>{{$product->code}}</td>
                             <td>{{$product->name}}</td>
-                            <td>{{$product->price}}</td>
+                            <td>{{$product->category->name}}</td>
+                            <td>{{$product->price_parse}}</td>
                             <td>
                                 <div class="btn-group">
                                     <a href="{{route('admin.products.edit', $product->id)}}" class="btn btn-info"><i class="fas fa-edit"></i></a>

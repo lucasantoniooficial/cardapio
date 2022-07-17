@@ -16,4 +16,9 @@ class Address extends Model
     {
         return $this->morphTo();
     }
+
+    public function getPlaceAttribute()
+    {
+        return "{$this->attributes['address']}, {$this->attributes['number']} - {$this->attributes['neighborhood']}";
+    }
 }

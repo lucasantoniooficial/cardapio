@@ -9,7 +9,14 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id','code','photo','name','description','price'];
+    protected $fillable = [
+        'category_id',
+        'code',
+        'photo',
+        'name',
+        'description',
+        'price'
+    ];
 
     public function category()
     {
@@ -21,7 +28,7 @@ class Product extends Model
         return $this->belongsToMany(Order::class);
     }
 
-    public function getPriceAttribute()
+    public function getPriceParseAttribute()
     {
         $fmt = numfmt_create('pt-BR', \NumberFormatter::CURRENCY);
         return numfmt_format_currency($fmt, $this->attributes['price'], 'BRL');
